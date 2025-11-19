@@ -3,7 +3,7 @@
 # 🚀 Tutorial Awal REST API HR (Django + MySQL + JWT)
 ## Tahap 1: Persiapan Lingkungan
 *Pastikan Anda sudah menginstal Python 3.10+.*
-1. Buat dan Aktifkan Virtual Environment.
+1. Buat dan Aktifkan Virtual Environment.  
     Penggunaan virtual environment sangat penting untuk mengisolasi dependensi proyek Anda.
     ```
     #Membuat environment 
@@ -21,7 +21,7 @@ Kita akan menginstal Django, Django REST Framework, dan paket yang dibutuhkan un
     ```
     pip install django djangorestframework djangorestframework-simplejwt mysqlclient
     ```
-    - django: Kerangka kerja utama.
-    - djangorestframework: Untuk membuat REST API.
-    - djangorestframework-simplejwt: Untuk otentikasi JWT.
-    - mysqlclient: Adaptor Python untuk menghubungkan ke MySQL.
+    * django: Kerangka kerja utama.
+    * djangorestframework: Untuk membuat REST API.
+    * djangorestframework-simplejwt: Untuk otentikasi JWT.
+    * mysqlclient: Adaptor Python untuk menghubungkan ke MySQL.
