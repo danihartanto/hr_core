@@ -1,1 +1,2 @@
-# hr_core
+# hr_core aplikasi management Human Resource
+Tutorial Install
