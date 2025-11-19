@@ -232,5 +232,6 @@ Anda membutuhkan pengguna untuk login dan mendapatkan token.
         - Method: GET
         - Header:
             - Key: Authorization
-            - Value: Bearer <TEMP_ACCESS_TOKEN_DARI_LANGKAH_A>
+            - Value: Bearer <TEMP_ACCESS_TOKEN_DARI_LANGKAH_A>  
+            
         Jika berhasil, Anda akan mendapatkan respons 200 OK (daftar karyawan kosong/belum ada). Jika Anda tidak menyertakan header Authorization, Anda akan mendapatkan 401 Unauthorized.
