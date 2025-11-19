@@ -227,3 +227,10 @@ Anda membutuhkan pengguna untuk login dan mendapatkan token.
                 "access": "..." 
             }
             ```
+    * B. Akses Endpoint Karyawan (Membutuhkan Otentikasi)
+        - URL: http://127.0.0.1:8000/api/v1/employees/
+        - Method: GET
+        - Header:
+            - Key: Authorization
+            - Value: Bearer <TEMP_ACCESS_TOKEN_DARI_LANGKAH_A>
+        Jika berhasil, Anda akan mendapatkan respons 200 OK (daftar karyawan kosong/belum ada). Jika Anda tidak menyertakan header Authorization, Anda akan mendapatkan 401 Unauthorized.
