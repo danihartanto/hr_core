@@ -21,7 +21,7 @@ Kita akan menginstal Django, Django REST Framework, dan paket yang dibutuhkan un
     ```
     pip install django djangorestframework djangorestframework-simplejwt mysqlclient
     ```
-*django: Kerangka kerja utama.
-*djangorestframework: Untuk membuat REST API.
-*djangorestframework-simplejwt: Untuk otentikasi JWT.
-*mysqlclient: Adaptor Python untuk menghubungkan ke MySQL.
+    - django: Kerangka kerja utama.
+    - djangorestframework: Untuk membuat REST API.
+    - djangorestframework-simplejwt: Untuk otentikasi JWT.
+    - mysqlclient: Adaptor Python untuk menghubungkan ke MySQL.
