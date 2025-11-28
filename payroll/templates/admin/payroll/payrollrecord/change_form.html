@@ -1,0 +1,11 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{# Memuat JavaScript setelah semua blok konten standar dimuat #}
+{% block extrahead %}
+    {{ block.super }}
+    
+    {# PENTING: Gunakan {{ block.super }} untuk memastikan skrip dasar Django Admin dimuat duluan. #}
+    {# Kemudian, kita memuat skrip kita sendiri. #}
+    <script type="text/javascript" src="{% static 'payroll/payroll_admin.js' %}"></script>
+{% endblock %}

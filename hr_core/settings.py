@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-9*w8(2e37o_bdi1cf_tte*uuz&)4-%ze46_61rq(&r7q7t-s&j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000", # URL frontend Anda
+    "http://localhost:5173",
+]
 
 # Application definition
 
@@ -37,11 +40,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # menangani cors error di FE
+    'corsheaders',
+    
+    # Aplikasi pihak ketiga
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    # Aplikasi lokal
+    'users.apps.UsersConfig',
+    'employees.apps.EmployeesConfig',
+    'organization.apps.OrganizationConfig',
+    'payroll.apps.PayrollConfig',
+    'attendance.apps.AttendanceConfig',
+    
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -73,10 +92,20 @@ WSGI_APPLICATION = 'hr_core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_hr', # Nama database yang Anda buat
+        'USER': 'root', # Ganti dengan username MySQL Anda
+        'PASSWORD': '', # Ganti dengan password MySQL Anda dan kosongi jika tanpa password
+        'HOST': '127.0.0.1', #sesuaikan host server
+        'PORT': '3308', #sesuaikan port sql server, saya menggunakan 3308
     }
 }
 
@@ -100,12 +129,42 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# hr_core/settings.py
+
+# Konfigurasi REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # SessionAuthentication harus diaktifkan untuk form login browser
+        'rest_framework.authentication.SessionAuthentication', 
+        
+        # JWT tetap diperlukan untuk aplikasi klien (frontend/mobile)
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        # Secara default, semua endpoint memerlukan autentikasi
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
+# Konfigurasi Simple JWT (Opsional, tetapi disarankan)
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60), # Masa berlaku token akses
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),   # Masa berlaku token refresh
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY, # Menggunakan SECRET_KEY Django
+    # ... konfigurasi lainnya
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+# LANGUAGE_CODE='id'
+TIME_ZONE = 'Asia/Jakarta'
 
 USE_I18N = True
 
